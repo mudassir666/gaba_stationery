@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:gaba_stationery/models/cart.dart';
 import 'package:gaba_stationery/models/stationery.dart';
+import 'package:gaba_stationery/screens/cart_screen.dart';
 import 'package:gaba_stationery/screens/stationery_detail_screen.dart';
 import 'package:gaba_stationery/screens/stationery_overview_screen.dart';
 import 'package:provider/provider.dart';
@@ -11,8 +13,11 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (ctx) => Stationery(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (ctx) => Stationery()),
+        ChangeNotifierProvider(create: (ctx) => Cart()),
+      ],
       child: MaterialApp(
         title: 'Gaba Stationery',
         debugShowCheckedModeBanner: false,
@@ -22,7 +27,8 @@ class MyApp extends StatelessWidget {
         ),
         home: StationeryOverviewScreen(),
         routes: {
-          StationeryDetailScreen.routeName : (ctx) => StationeryDetailScreen(),
+          StationeryDetailScreen.routeName: (ctx) => StationeryDetailScreen(),
+          CartScreen.routeName : (ctx) => CartScreen(),
         },
       ),
     );

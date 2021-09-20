@@ -8,28 +8,28 @@ class Stationery with ChangeNotifier {
       title: 'pen',
       description: 'ball pen',
       imageUrl: "https://awebplan.com/wp-content/uploads/2017/12/pen.jpg",
-      price: 20,
+      price: 40,
     ),
     StationeryBlueprint(
       id: 's2',
       title: 'pen',
       description: 'ball pen',
       imageUrl: "https://awebplan.com/wp-content/uploads/2017/12/pen.jpg",
-      price: 20,
+      price: 60,
     ),
     StationeryBlueprint(
       id: 's3',
       title: 'beg',
       description: 'ball pen',
       imageUrl: "https://awebplan.com/wp-content/uploads/2017/12/pen.jpg",
-      price: 20,
+      price: 10,
     ),
     StationeryBlueprint(
       id: 's4',
       title: 'book',
       description: 'ball pen',
       imageUrl: "https://awebplan.com/wp-content/uploads/2017/12/pen.jpg",
-      price: 20,
+      price: 80,
     ),
   ];
 
