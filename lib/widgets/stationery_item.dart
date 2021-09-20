@@ -20,7 +20,7 @@ class StationeryItem extends StatelessWidget {
           },
           child: Image.network(
             stationery.imageUrl,
-            fit: BoxFit.cover,
+            fit: BoxFit.contain,
           ),
         ),
         footer: GridTileBar(

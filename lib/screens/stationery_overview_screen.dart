@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gaba_stationery/models/cart.dart';
 import 'package:gaba_stationery/screens/cart_screen.dart';
 import 'package:gaba_stationery/widgets/badge.dart';
+import 'package:gaba_stationery/widgets/drawer_widget.dart';
 
 import 'package:gaba_stationery/widgets/stationery_grid.dart';
 import 'package:provider/provider.dart';
@@ -64,6 +65,7 @@ class _StationeryOverviewScreenState extends State<StationeryOverviewScreen> {
         ],
       ),
       body: StationeryGrid(_showOnlyFavorite),
+      drawer: DrawerWidget(),
     );
   }
 }

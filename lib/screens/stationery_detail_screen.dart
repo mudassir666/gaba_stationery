@@ -8,13 +8,46 @@ class StationeryDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final stationeryId = ModalRoute.of(context)!.settings.arguments as String;
-    final stationery = Provider.of<Stationery>(context,listen: false).findById(stationeryId);
+    final stationery =
+        Provider.of<Stationery>(context, listen: false).findById(stationeryId);
 
     return Scaffold(
       appBar: AppBar(
         title: Text(stationery.title),
       ),
-      body: Container(),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Container(
+              height: 400,
+              width: double.infinity,
+              child: FittedBox(
+                child: Image.network(
+                  stationery.imageUrl,
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
+            SizedBox(height: 10),
+            Text(
+              "\$${stationery.price}",
+              style: TextStyle(
+                color: Colors.grey,
+                fontSize: 20,
+              ),
+            ),
+            SizedBox(height: 10),
+            Text(
+              "${stationery.description}",
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 20,
+              ),
+              softWrap: true,
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

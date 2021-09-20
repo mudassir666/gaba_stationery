@@ -5,31 +5,31 @@ class Stationery with ChangeNotifier {
   List<StationeryBlueprint> _items = [
     StationeryBlueprint(
       id: 's1',
-      title: 'pen',
+      title: 'Pen',
       description: 'ball pen',
       imageUrl: "https://awebplan.com/wp-content/uploads/2017/12/pen.jpg",
-      price: 40,
+      price: 20,
     ),
     StationeryBlueprint(
       id: 's2',
-      title: 'pen',
+      title: 'Book',
       description: 'ball pen',
-      imageUrl: "https://awebplan.com/wp-content/uploads/2017/12/pen.jpg",
-      price: 60,
+      imageUrl: "https://www.ynharari.com/wp-content/uploads/2017/01/sapiens.png",
+      price: 300,
     ),
     StationeryBlueprint(
       id: 's3',
-      title: 'beg',
+      title: 'Beg',
       description: 'ball pen',
-      imageUrl: "https://awebplan.com/wp-content/uploads/2017/12/pen.jpg",
-      price: 10,
+      imageUrl: "https://image.made-in-china.com/2f0j00yahGtFRlhNco/Wholesale-Backpack-Bag-School-for-Boys-and-Girls.jpg",
+      price: 800,
     ),
     StationeryBlueprint(
       id: 's4',
-      title: 'book',
+      title: 'Box',
       description: 'ball pen',
-      imageUrl: "https://awebplan.com/wp-content/uploads/2017/12/pen.jpg",
-      price: 80,
+      imageUrl: "https://i.pinimg.com/originals/83/68/9f/83689fac2c6724fd9dcb056eb92598b5.jpg",
+      price: 160,
     ),
   ];
 

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gaba_stationery/models/cart.dart';
+import 'package:gaba_stationery/models/order.dart';
 import 'package:gaba_stationery/widgets/cart_item.dart';
 import 'package:provider/provider.dart';
 
@@ -8,7 +9,8 @@ class CartScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final cart = Provider.of<Cart>(context, listen: false);
+    final cart = Provider.of<Cart>(context);
+    final order =  Provider.of<Order>(context, listen: false);
     return Scaffold(
       appBar: AppBar(
         title: Text('Your Cart'),
@@ -20,20 +22,25 @@ class CartScreen extends StatelessWidget {
             margin: EdgeInsets.all(10),
             elevation: 6,
             child: ListTile(
-              title: Consumer<Cart>(
-                  builder: (ctx, cart, child) => Text(
-                        "Total ${cart.totalAmount.toStringAsFixed(2)}",
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      )),
+              title: Text(
+                "Total ${cart.totalAmount.toStringAsFixed(2)}",
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
               leading: Icon(
                 Icons.monetization_on_rounded,
                 color: Theme.of(context).primaryColorDark,
               ),
               trailing: ElevatedButton(
-                onPressed: () {},
+                onPressed: cart.items.isEmpty ? null : () {
+                  order.addOrder(
+                    cart.items.values.toList(),
+                    cart.totalAmount,
+                  );
+                  cart.clear();
+                },
                 child: Text('Order Now',
                     style: TextStyle(
                       fontSize: 16,
