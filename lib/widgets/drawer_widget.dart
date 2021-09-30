@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:gaba_stationery/screens/order_screen.dart';
+import 'package:gaba_stationery/screens/user_stationery_screen.dart';
 
 class DrawerWidget extends StatelessWidget {
   @override
@@ -26,6 +27,14 @@ class DrawerWidget extends StatelessWidget {
             title: Text('Orders'),
             onTap: () {
               Navigator.of(context).pushReplacementNamed(OrderScreen.routeName);
+            },
+          ),
+           Divider(),
+          ListTile(
+            leading: Icon(Icons.edit),
+            title: Text('Manage Stationies'),
+            onTap: () {
+              Navigator.of(context).pushReplacementNamed(UserStationeryScreen.routeName);
             },
           ),
         ],

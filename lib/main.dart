@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:gaba_stationery/models/cart.dart';
 import 'package:gaba_stationery/models/stationery.dart';
 import 'package:gaba_stationery/screens/cart_screen.dart';
+import 'package:gaba_stationery/screens/edit_product_screen.dart';
 import 'package:gaba_stationery/screens/order_screen.dart';
 import 'package:gaba_stationery/screens/stationery_detail_screen.dart';
 import 'package:gaba_stationery/screens/stationery_overview_screen.dart';
+import 'package:gaba_stationery/screens/user_stationery_screen.dart';
 import 'package:provider/provider.dart';
 
 import 'models/order.dart';
@@ -34,6 +36,8 @@ class MyApp extends StatelessWidget {
           StationeryDetailScreen.routeName: (ctx) => StationeryDetailScreen(),
           CartScreen.routeName : (ctx) => CartScreen(),
           OrderScreen.routeName : (ctx) => OrderScreen(),
+          UserStationeryScreen.routeName : (ctx) => UserStationeryScreen(),
+          EditProductScreen.routeName : (ctx) => EditProductScreen(),
         },
       ),
     );

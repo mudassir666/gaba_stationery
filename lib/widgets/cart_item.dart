@@ -21,17 +21,44 @@ class CartItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Dismissible(
       key: ValueKey(id),
-    direction: DismissDirection.endToStart,
-     onDismissed: (_){
-        Provider.of<Cart>(context,listen: false).removeItem(productId);
-     } ,
-    background: Container(
-      padding: EdgeInsets.all(5),
-      margin: EdgeInsets.all(10),
-      color: Theme.of(context).errorColor,
-      child: Icon(Icons.delete_rounded,size: 40,color: Colors.white,),
-      alignment: Alignment.centerRight,
-    ),
+      direction: DismissDirection.endToStart,
+      onDismissed: (_) {
+        Provider.of<Cart>(context, listen: false).removeItem(productId);
+      },
+      confirmDismiss: (direction) {
+        return showDialog(
+          context: context,
+          builder: (ctx) => AlertDialog(
+            title: Text('Are you sure?'),
+            content: Text('Do you want to remove the item from the cart?'),
+            actions: [
+               TextButton(
+                onPressed: () {
+                  Navigator.of(ctx).pop(true);
+                },
+                child: Text('Yes'),
+              ),
+               TextButton(
+                onPressed: () {
+                  Navigator.of(ctx).pop(false);
+                },
+                child: Text('No'),
+              ),
+            ],
+          ),
+        );
+      },
+      background: Container(
+        padding: EdgeInsets.all(5),
+        margin: EdgeInsets.all(10),
+        color: Theme.of(context).errorColor,
+        child: Icon(
+          Icons.delete_rounded,
+          size: 40,
+          color: Colors.white,
+        ),
+        alignment: Alignment.centerRight,
+      ),
       child: Card(
         margin: EdgeInsets.all(10),
         elevation: 6,
@@ -49,17 +76,20 @@ class CartItem extends StatelessWidget {
             ),
           ),
           title: Text(
-            title,style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                ),
-              
+            title,
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+            ),
           ),
           subtitle: Text("Total: \$${price * quantity}"),
-          trailing: Text("$quantity x",style: TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.bold,
-                ),),
+          trailing: Text(
+            "$quantity x",
+            style: TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
         ),
       ),
     );

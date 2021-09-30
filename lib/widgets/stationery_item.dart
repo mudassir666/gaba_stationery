@@ -53,6 +53,18 @@ class StationeryItem extends StatelessWidget {
             ),
             onPressed: () {
               cart.addItem(stationery.id, stationery.title, stationery.price);
+              ScaffoldMessenger.of(context).hideCurrentSnackBar();
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text('Added item to cart!'),
+                  duration: Duration(seconds: 2),
+                  action: SnackBarAction(
+                      label: 'Undo',
+                      onPressed: () {
+                        cart.removeSingleItem(stationery.id);
+                      }),
+                ),
+              );
               // print(cart.totalAmount);
             },
           ),
