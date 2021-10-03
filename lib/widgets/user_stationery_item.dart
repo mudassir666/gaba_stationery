@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:gaba_stationery/models/stationery.dart';
+import 'package:gaba_stationery/screens/edit_product_screen.dart';
+import 'package:provider/provider.dart';
 
 class UserStationeryItem extends StatelessWidget {
   //const UserStationeryItem({ Key? key }) : super(key: key);
@@ -24,14 +27,20 @@ class UserStationeryItem extends StatelessWidget {
         child: Row(
           children: [
             IconButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context)
+                    .pushNamed(EditProductScreen.routeName, arguments: id);
+              },
               icon: Icon(
                 Icons.edit,
                 color: Theme.of(context).primaryColorDark,
               ),
             ),
             IconButton(
-              onPressed: () {},
+              onPressed: () {
+                Provider.of<Stationery>(context, listen: false)
+                    .deleteProduct(id);
+              },
               icon: Icon(
                 Icons.delete,
                 color: Theme.of(context).errorColor,
