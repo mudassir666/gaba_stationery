@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class StationeryBlueprint with ChangeNotifier {
   final String id;
@@ -17,8 +19,33 @@ class StationeryBlueprint with ChangeNotifier {
     this.isFavorite = false,
   });
 
-  void changeFavoriteStatus() {
+  // to void code duplication
+  void _setFavValue(bool newValue) {
+    isFavorite = newValue;
+    notifyListeners();
+  }
+
+  Future<void> changeFavoriteStatus() async {
+    final url =
+        'https://gaba-stationery-default-rtdb.firebaseio.com/stationery/$id.json';
+    final oldFavorite = isFavorite;
     isFavorite = !isFavorite;
     notifyListeners();
+
+    try {
+      final response = await http.patch(
+        Uri.parse(url),
+        body: json.encode({
+          'isFavorite': isFavorite,
+        }),
+      );
+
+      if (response.statusCode >= 400) {
+        // to undo the action
+        _setFavValue(oldFavorite);
+      }
+    } catch (error) {
+      _setFavValue(oldFavorite);
+    }
   }
 }

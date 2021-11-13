@@ -17,6 +17,8 @@ class UserStationeryItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // storing ScaffoldMessenger because it could not have the access of context down below
+    final scaffold = ScaffoldMessenger.of(context);
     return ListTile(
       leading: CircleAvatar(
         backgroundImage: NetworkImage(imgUrl),
@@ -37,9 +39,17 @@ class UserStationeryItem extends StatelessWidget {
               ),
             ),
             IconButton(
-              onPressed: () {
-                Provider.of<Stationery>(context, listen: false)
+              onPressed: () async {
+             try{ await  Provider.of<Stationery>(context, listen: false)
                     .deleteProduct(id);
+             }catch(error){
+                scaffold.showSnackBar(
+                    SnackBar(
+                      content: Text("Deleting failed!",textAlign: TextAlign.center,),
+                      
+                    ),
+                  );
+             }
               },
               icon: Icon(
                 Icons.delete,

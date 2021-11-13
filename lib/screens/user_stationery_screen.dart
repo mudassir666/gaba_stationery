@@ -8,6 +8,10 @@ import 'package:provider/provider.dart';
 class UserStationeryScreen extends StatelessWidget {
   static const routeName = '/user-stationery';
 
+  Future<void> _refresh(BuildContext context) async{
+    return await Provider.of<Stationery>(context,listen :false).fetchData();
+  }
+
   @override
   Widget build(BuildContext context) {
     final stationery = Provider.of<Stationery>(context);
@@ -22,17 +26,23 @@ class UserStationeryScreen extends StatelessWidget {
         ],
       ),
       drawer: DrawerWidget(),
-      body: ListView.builder(
-        itemCount: stationery.items.length,
-        itemBuilder: (ctx, i) => Column(
-          children: [
-            UserStationeryItem(
-              id: stationery.items[i].id,
-              title: stationery.items[i].title,
-              imgUrl: stationery.items[i].imageUrl,
+      body: RefreshIndicator(
+        onRefresh: () => _refresh(context),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: ListView.builder(
+            itemCount: stationery.items.length,
+            itemBuilder: (ctx, i) => Column(
+              children: [
+                UserStationeryItem(
+                  id: stationery.items[i].id,
+                  title: stationery.items[i].title,
+                  imgUrl: stationery.items[i].imageUrl,
+                ),
+                Divider(),
+              ],
             ),
-            Divider(),
-          ],
+          ),
         ),
       ),
     );

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gaba_stationery/models/cart.dart';
+import 'package:gaba_stationery/models/stationery.dart';
 import 'package:gaba_stationery/screens/cart_screen.dart';
 import 'package:gaba_stationery/widgets/badge.dart';
 import 'package:gaba_stationery/widgets/drawer_widget.dart';
@@ -20,6 +21,21 @@ class StationeryOverviewScreen extends StatefulWidget {
 
 class _StationeryOverviewScreenState extends State<StationeryOverviewScreen> {
   var _showOnlyFavorite = false;
+  var _isLoading = false;
+
+  @override
+  void initState() {
+    setState(() {
+      _isLoading = true;
+    });
+    Provider.of<Stationery>(context, listen: false).fetchData().then((_) {
+      setState(() {
+        _isLoading = false;
+      });
+    });
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -64,7 +80,11 @@ class _StationeryOverviewScreenState extends State<StationeryOverviewScreen> {
           )
         ],
       ),
-      body: StationeryGrid(_showOnlyFavorite),
+      body: _isLoading
+          ? Center(
+              child: CircularProgressIndicator(),
+            )
+          : StationeryGrid(_showOnlyFavorite),
       drawer: DrawerWidget(),
     );
   }
